@@ -8,7 +8,7 @@ PROTECTED_BRANCHES=( development master release )
 
 echo "PRE COMMIT CHECK"
 
-for branch in "${protected_branches[@]}"; do
+for branch in "${PROTECTED_BRANCHES[@]}"; do
   PROTECTED_BRANCH=$branch
 
   MESSAGE='Direct commit to '$PROTECTED_BRANCH' is forbidden. Make pull request!'
