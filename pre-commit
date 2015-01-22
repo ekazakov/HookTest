@@ -6,10 +6,15 @@ CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 
 PROTECTED_BRANCHES=( development master release )
 
+echo "PRE COMMIT CHECK"
+
 for branch in "${protected_branches[@]}"; do
   PROTECTED_BRANCH=$branch
 
   MESSAGE='Direct commit to '$PROTECTED_BRANCH' is forbidden. Make pull request!'
+
+  echo "PROTECTED_BRANCH: $PROTECTED_BRANCH"
+  echo "CURRENT_BRANCH: $CURRENT_BRANCH"
 
   do_exit() {
     echo $MESSAGE
@@ -24,4 +29,4 @@ done
 
 unset do_exit
 
-exit 0
+exit 1
