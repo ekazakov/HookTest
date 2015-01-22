@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# chmod +x .git/hooks/pre-commit
+
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+PROTECTED_BRANCHES=( development master release )
+
+for branch in "${protected_branches[@]}"; do
+  PROTECTED_BRANCH=$branch
+
+  MESSAGE='Direct commit to '$PROTECTED_BRANCH' is forbidden. Make pull request!'
+
+  do_exit() {
+    echo $MESSAGE
+    exit 1
+  }
+
+  if [[ $PROTECTED_BRANCH = $CURRENT_BRANCH ]]; then
+    do_exit
+  fi
+
+done
+
+unset do_exit
+
+exit 0
